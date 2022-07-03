@@ -4,6 +4,7 @@ import java.util.Map;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.xyzbank.retail.component.AppData;
@@ -23,10 +24,11 @@ public class XxyBankServiceImpl implements XxzBankService {
 
 	private final Logger log = LoggerFactory.getLogger(XxyBankServiceImpl.class);
 
+	@Autowired
 	AppData appData;
 
 	/*
-	 * Constructor
+	 * Constructor to initialize in memory map
 	 */
 	public XxyBankServiceImpl(AppData appData) {
 		super();
@@ -64,7 +66,6 @@ public class XxyBankServiceImpl implements XxzBankService {
 
 	@Override
 	public Account topup(TopupAccount acc) {
-
 		Account topUpAccount = appData.getAccountMap().get(acc.getName());
 		if (topUpAccount.getOweTo() != null && !topUpAccount.getOweTo().isEmpty()) {
 			Account payTo = appData.getAccountMap().get(topUpAccount.getOweTo());
