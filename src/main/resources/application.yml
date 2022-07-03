@@ -1,0 +1,22 @@
+logging:
+  level:
+    org.springframework: ERROR
+    com.xyzbank: DEBUG
+
+server:
+    port: 11016
+spring:
+  application:
+    name:xyzbank
+  profiles:
+    active: dev
+  main:
+    banner-mode: off
+
+email: sudhahar.java18@gmail.com
+thread-pool: 10
+
+springdoc:
+  api-docs:
+    path: /swagger19
+
