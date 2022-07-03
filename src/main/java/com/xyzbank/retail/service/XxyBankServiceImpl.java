@@ -1,8 +1,6 @@
 package com.xyzbank.retail.service;
 
-import java.util.List;
 import java.util.Map;
-import java.util.stream.Collectors;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -13,6 +11,13 @@ import com.xyzbank.retail.model.Account;
 import com.xyzbank.retail.model.PayAccount;
 import com.xyzbank.retail.model.TopupAccount;
 
+/*
+ * Implementation class for XxzBankService
+ * @author  Sudhahar
+ * @version 1.0
+ * @since   2022-07-01 
+ */
+
 @Service
 public class XxyBankServiceImpl implements XxzBankService {
 
@@ -20,11 +25,20 @@ public class XxyBankServiceImpl implements XxzBankService {
 
 	AppData appData;
 
+	/*
+	 * Constructor
+	 */
 	public XxyBankServiceImpl(AppData appData) {
 		super();
 		this.appData = appData;
 	}
 
+	/**
+	 * passing name to get Account object
+	 *
+	 * @param customer name
+	 * @return Account Object
+	 */
 
 	@Override
 	public Account findbyName(String name) {
@@ -40,6 +54,13 @@ public class XxyBankServiceImpl implements XxzBankService {
 			log.info("Existing User returned  !!!!!!!![{}]", account);
 		return account;
 	}
+
+	/**
+	 * Top-up the amount to respective customer
+	 *
+	 * @param TopupAccount Object
+	 * @return Account Object
+	 */
 
 	@Override
 	public Account topup(TopupAccount acc) {
@@ -81,6 +102,12 @@ public class XxyBankServiceImpl implements XxzBankService {
 		return account;
 	}
 
+	/**
+	 * Customer pay amount to another customer
+	 *
+	 * @param PayAccount Object
+	 * @return Account Object
+	 */
 	@SuppressWarnings("unused")
 	@Override
 	public Account pay(PayAccount payAccount) {
@@ -89,12 +116,12 @@ public class XxyBankServiceImpl implements XxzBankService {
 
 		if (payFrom == null) {
 			Account acc = new Account();
-			log.info("User {{}] Not Found ",payAccount.getName());
+			log.info("User {{}] Not Found ", payAccount.getName());
 			return null;
 		}
 		if (payTo == null) {
 			Account acc = new Account();
-			log.info("Beneficiary [{}] Not Found ",payTo.getName());
+			log.info("Beneficiary [{}] Not Found ", payTo.getName());
 			return acc;
 		} else {
 			double curBalance = 0;
@@ -127,11 +154,11 @@ public class XxyBankServiceImpl implements XxzBankService {
 						payFrom.setOweFromAmount(Math.abs(transferAmt - payFrom.getOweFromAmount()));
 					} else {
 						payTo.setBalance(payTo.getBalance() + Math.abs(transferAmt - payFrom.getOweFromAmount()));
-						payFrom.setBalance(payFrom.getBalance() - Math.abs (transferAmt - payFrom.getOweFromAmount()));
+						payFrom.setBalance(payFrom.getBalance() - Math.abs(transferAmt - payFrom.getOweFromAmount()));
 						payTo.setOweToAmount(0L);
 						payTo.setOweTo(null);
 						payFrom.setOweFromAmount(0L);
-						payFrom.setOweFrom(null);						
+						payFrom.setOweFrom(null);
 					}
 
 				} else {
@@ -144,6 +171,13 @@ public class XxyBankServiceImpl implements XxzBankService {
 		}
 		return payFrom;
 	}
+
+	/**
+	 * Update in-memory account details
+	 *
+	 * @param PayAccount Object
+	 * @return Account Object
+	 */
 
 	@Override
 	public void updateAccounts(Account acc) {
