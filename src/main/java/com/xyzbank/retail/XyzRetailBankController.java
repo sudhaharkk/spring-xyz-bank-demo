@@ -17,7 +17,7 @@ import com.xyzbank.retail.model.TopupAccount;
 import com.xyzbank.retail.service.XxzBankService;
 
 /**
- * This is controller class in entry point for API's
+ * This is controller class in entry point for API's.
  * 
  * @author Sudhahar
  * @version 1.0
